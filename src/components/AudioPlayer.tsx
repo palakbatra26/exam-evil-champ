@@ -8,7 +8,7 @@ interface AudioPlayerProps {
   autoPlay?: boolean;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = true }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [isLoading, setIsLoading] = useState(true);
@@ -113,7 +113,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false })
     <div className="fixed bottom-4 right-4 z-50">
       <audio 
         ref={audioRef} 
-        src={audioSrc} 
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
         loop 
         preload="auto"
         onError={() => console.error("Audio error occurred")}

@@ -58,14 +58,14 @@ const ExamGreeting: React.FC = () => {
     // Added longer delay to give more time to read
     setTimeout(() => {
       setSection(2);
-    }, 3000); // Additional delay before moving to next section
+    }, 500); // Further reduced delay before moving to next section
   };
 
   // Progress to section 4 after name reveal
   const goToSection4 = () => {
     setTimeout(() => {
       setSection(4);
-    }, 8000); // Increased delay to give more time to read
+    }, 1000); // Further reduced delay to speed up transition
   };
 
   return (
@@ -151,7 +151,7 @@ const ExamGreeting: React.FC = () => {
                 duration={2500}
               />
               <AnimatedText 
-                text="chlo War khatam, ab exam mode ON! 🧠💥"
+                text="Mood: War done ✅ | Exam Mode: Activated 🚨📖💥"
                 className="text-lg font-medium text-gray-700" 
                 animation="slide-up"
                 delay={12000}
