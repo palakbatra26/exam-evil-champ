@@ -11,11 +11,38 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     if (audioRef.current) {
       // Set audio volume to a comfortable level
-      audioRef.current.volume = 0.5;
+      audioRef.current.volume = 0.4;
+      
+      const handleCanPlayThrough = () => {
+        setIsLoading(false);
+        console.log("Audio is ready to play");
+      };
+      
+      const handlePlay = () => {
+        setIsPlaying(true);
+        console.log("Audio playing");
+      };
+      
+      const handlePause = () => {
+        setIsPlaying(false);
+        console.log("Audio paused");
+      };
+      
+      const handleError = (e: ErrorEvent) => {
+        console.error("Audio error:", e);
+        setIsLoading(false);
+      };
+      
+      // Add event listeners
+      audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
+      audioRef.current.addEventListener('play', handlePlay);
+      audioRef.current.addEventListener('pause', handlePause);
+      audioRef.current.addEventListener('error', handleError);
       
       if (autoPlay) {
         // We need to wait for user interaction before playing audio
@@ -49,8 +76,24 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false })
         
         return () => {
           document.removeEventListener('click', handleFirstInteraction);
+          
+          if (audioRef.current) {
+            audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
+            audioRef.current.removeEventListener('play', handlePlay);
+            audioRef.current.removeEventListener('pause', handlePause);
+            audioRef.current.removeEventListener('error', handleError);
+          }
         };
       }
+      
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
+          audioRef.current.removeEventListener('play', handlePlay);
+          audioRef.current.removeEventListener('pause', handlePause);
+          audioRef.current.removeEventListener('error', handleError);
+        }
+      };
     }
   }, [autoPlay]);
 
@@ -63,20 +106,31 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false })
           console.error("Play prevented:", error);
         });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
-      <audio ref={audioRef} src={audioSrc} loop />
+      <audio 
+        ref={audioRef} 
+        src={audioSrc} 
+        loop 
+        preload="auto"
+        onError={() => console.error("Audio error occurred")}
+      />
       <Button 
         onClick={togglePlay}
         variant="outline" 
         size="icon" 
         className="rounded-full shadow-md hover:shadow-lg transition-all duration-300 bg-white/70 backdrop-blur-sm"
       >
-        {isPlaying ? <Music className="h-4 w-4 text-primary animate-pulse" /> : <VolumeX className="h-4 w-4" />}
+        {isLoading ? (
+          <Music className="h-4 w-4 animate-pulse" />
+        ) : isPlaying ? (
+          <Volume2 className="h-4 w-4 text-primary animate-pulse" />
+        ) : (
+          <VolumeX className="h-4 w-4" />
+        )}
       </Button>
     </div>
   );

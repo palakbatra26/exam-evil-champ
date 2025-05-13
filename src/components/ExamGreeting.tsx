@@ -11,6 +11,16 @@ const ExamGreeting: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [section, setSection] = useState(1);
   const [audioReady, setAudioReady] = useState(false);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  const funnyQuotes = [
+    "\"Syllabus kam ho na ho, par toppers ke aansoo zaroor kam honge.\"",
+    "\"Exam center mein sirf ek hi chiz fast chalti hai... Ghadi ke kaante!\"",
+    "\"Teacher says: 'I taught you everything.' Student says: 'But you didn't teach me how to pass without studying!'\"",
+    "\"Marks itne kam aate hai ki calculator ko bhi sharam aati hai.\"",
+    "\"Exams ke baad, Maa ka pahla sawal: Paper kaisa gaya? Doosra sawal: Tere dost ka kaisa gaya?\"",
+    "\"Kal exam hai aur aaj concentration itna hai ki Netflix ki opening sound bhi revision lag rahi hai.\"",
+  ];
 
   // Handle section transitions
   useEffect(() => {
@@ -21,6 +31,17 @@ const ExamGreeting: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [section]);
+
+  // Rotate quotes automatically in section 4
+  useEffect(() => {
+    if (section === 4) {
+      const quoteRotationInterval = setInterval(() => {
+        setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % funnyQuotes.length);
+      }, 8000); // Change quote every 8 seconds
+      
+      return () => clearInterval(quoteRotationInterval);
+    }
+  }, [section, funnyQuotes.length]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,21 +58,21 @@ const ExamGreeting: React.FC = () => {
     // Added longer delay to give more time to read
     setTimeout(() => {
       setSection(2);
-    }, 1000); // Additional delay before moving to next section
+    }, 3000); // Additional delay before moving to next section
   };
 
   // Progress to section 4 after name reveal
   const goToSection4 = () => {
     setTimeout(() => {
       setSection(4);
-    }, 6000); // Increased delay to give more time to read
+    }, 8000); // Increased delay to give more time to read
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {audioReady && (
         <AudioPlayer 
-          audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+          audioSrc="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=lofi-study-112191.mp3" 
           autoPlay={true}
         />
       )}
@@ -67,15 +88,15 @@ const ExamGreeting: React.FC = () => {
               <AnimatedText 
                 text="Shh... Ruko jara, sabar karo..."
                 className="text-lg font-medium text-gray-700" 
-                delay={1000}
-                duration={2000}
+                delay={1500}
+                duration={2500}
                 animation="fade-in"
               />
               <AnimatedText 
                 text="Kuch mzedar hone wala hai... 😈"
                 className="text-lg font-medium text-gray-700" 
-                delay={4000}
-                duration={2000}
+                delay={6000}
+                duration={2500}
                 animation="slide-up"
                 onAnimationComplete={goToSection2}
               />
@@ -112,43 +133,43 @@ const ExamGreeting: React.FC = () => {
                 text={`Arre ${name}!`}
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
-                delay={1000}
-                duration={2000}
+                delay={1500}
+                duration={2500}
               />
               <AnimatedText 
                 text="Sunna hai..."
                 className="text-xl font-medium text-gray-700" 
                 animation="fade-in"
-                delay={3000}
-                duration={2000}
+                delay={4500}
+                duration={2500}
               />
               <AnimatedText 
                 text="War isliye cancel hui thi kyuki GNE ke students ko padhna tha! 📚😂"
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
-                delay={5000}
-                duration={2000}
+                delay={8000}
+                duration={2500}
               />
               <AnimatedText 
                 text="Break khatam, ab exam mode ON! 🧠💥"
                 className="text-lg font-medium text-gray-700" 
                 animation="slide-up"
-                delay={7000}
-                duration={2000}
+                delay={12000}
+                duration={2500}
                 onAnimationComplete={goToSection4}
               />
             </div>
           )}
           
-          {/* Section 4: Quote */}
+          {/* Section 4: Rotating Quotes */}
           {section === 4 && (
             <div className="space-y-6 text-center animate-fade-in">
               <h2 className="text-2xl font-bold text-gradient mb-6">
                 Yaad Rakhna
               </h2>
-              <div className="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg shadow-inner">
-                <p className="text-lg font-kalam text-gray-800 italic">
-                  "Syllabus kam ho na ho, par toppers ke aansoo zaroor kam honge."
+              <div className="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg shadow-inner min-h-[120px] flex items-center justify-center">
+                <p className="text-lg font-kalam text-gray-800 italic transition-all duration-1000">
+                  {funnyQuotes[currentQuoteIndex]}
                 </p>
               </div>
               <div className="pt-6">
