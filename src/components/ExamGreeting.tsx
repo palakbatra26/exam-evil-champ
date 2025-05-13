@@ -15,10 +15,10 @@ const ExamGreeting: React.FC = () => {
 
   const funnyQuotes = [
     "\"Syllabus kam ho na ho, par toppers ke aansoo zaroor kam honge.\"",
-    "\"Exam center mein sirf ek hi chiz fast chalti hai... Ghadi ke kaante!\"",
-    "\"Teacher says: 'I taught you everything.' Student says: 'But you didn't teach me how to pass without studying!'\"",
+    "\"Exam center mein speed nahi, sirf tension ki race chalti hai!\"",
+    "\"Tension ka level itna high hai, ki calculator bhi blood pressure check karne lag gaya hai'\"",
     "\"Marks itne kam aate hai ki calculator ko bhi sharam aati hai.\"",
-    "\"Exams ke baad, Maa ka pahla sawal: Paper kaisa gaya? Doosra sawal: Tere dost ka kaisa gaya?\"",
+    "\"Exam hall mein pen chalti hai ya taqdeer — decide karta hai pichle raat ka padhna.\"",
     "\"Kal exam hai aur aaj concentration itna hai ki Netflix ki opening sound bhi revision lag rahi hai.\"",
   ];
 
@@ -144,14 +144,14 @@ const ExamGreeting: React.FC = () => {
                 duration={2500}
               />
               <AnimatedText 
-                text="War isliye cancel hui thi kyuki GNE ke students ko padhna tha! 📚😂"
+                text="War isliye cancel hui thi kyuki GNE ke students ke Exam  the! 📚😂"
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
                 delay={8000}
                 duration={2500}
               />
               <AnimatedText 
-                text="Break khatam, ab exam mode ON! 🧠💥"
+                text="chlo War khatam, ab exam mode ON! 🧠💥"
                 className="text-lg font-medium text-gray-700" 
                 animation="slide-up"
                 delay={12000}
