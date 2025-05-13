@@ -1,7 +1,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, Music } from "lucide-react";
 
 interface AudioPlayerProps {
   audioSrc: string;
@@ -53,7 +53,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false })
         size="icon" 
         className="rounded-full shadow-md hover:shadow-lg transition-all duration-300 bg-white/70 backdrop-blur-sm"
       >
-        {isPlaying ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+        {isPlaying ? <Music className="h-4 w-4 text-primary animate-pulse" /> : <VolumeX className="h-4 w-4" />}
       </Button>
     </div>
   );

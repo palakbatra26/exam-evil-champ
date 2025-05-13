@@ -48,7 +48,7 @@ const ExamGreeting: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {audioReady && (
         <AudioPlayer 
-          audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" 
+          audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
           autoPlay={submitted}
         />
       )}
@@ -62,13 +62,13 @@ const ExamGreeting: React.FC = () => {
           {section === 1 && (
             <div className="space-y-4 text-center">
               <AnimatedText 
-                text="Shh... don't scroll fast. Just wait."
+                text="Shh... Ruko jara, sabar karo..."
                 className="text-lg font-medium text-gray-700" 
                 delay={500}
                 animation="fade-in"
               />
               <AnimatedText 
-                text="Something fun (and evil 😈) is about to begin."
+                text="Kuch mzedar hone wala hai... 😈"
                 className="text-lg font-medium text-gray-700" 
                 delay={2000}
                 animation="slide-up"
@@ -80,11 +80,11 @@ const ExamGreeting: React.FC = () => {
           {/* Section 2: Name Input Form */}
           {section === 2 && (
             <div className="space-y-6 text-center animate-slide-up">
-              <h2 className="text-2xl font-bold text-gradient">Enter your name, Champ 👇</h2>
+              <h2 className="text-2xl font-bold text-gradient">Apna naam batao, Champion 👇</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <Input 
                   type="text"
-                  placeholder="Your name here"
+                  placeholder="Naam yaha likho"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="text-center text-lg border-2 border-primary/30 focus-visible:ring-primary"
@@ -94,7 +94,7 @@ const ExamGreeting: React.FC = () => {
                   type="submit" 
                   className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity"
                 >
-                  Let's Go!
+                  Chalo Shuru Karen!
                 </Button>
               </form>
             </div>
@@ -104,25 +104,25 @@ const ExamGreeting: React.FC = () => {
           {section === 3 && (
             <div className="space-y-6 text-center">
               <AnimatedText 
-                text={`Hey Champ, ${name}!`}
+                text={`Arre ${name}!`}
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
                 delay={200}
               />
               <AnimatedText 
-                text="So..."
+                text="Sunna hai..."
                 className="text-xl font-medium text-gray-700" 
                 animation="fade-in"
                 delay={1000}
               />
               <AnimatedText 
-                text="Happy Exam Starting! 😈📚💥"
+                text="War isliye cancel hui thi kyuki GNE ke students ko padhna tha! 📚😂"
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
                 delay={2000}
               />
               <AnimatedText 
-                text="Your break is over. Back to study mode now 😂"
+                text="Break khatam, ab exam mode ON! 🧠💥"
                 className="text-lg font-medium text-gray-700" 
                 animation="slide-up"
                 delay={3000}
@@ -135,11 +135,11 @@ const ExamGreeting: React.FC = () => {
           {section === 4 && (
             <div className="space-y-6 text-center animate-fade-in">
               <h2 className="text-2xl font-bold text-gradient mb-6">
-                Remember
+                Yaad Rakhna
               </h2>
               <div className="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg shadow-inner">
                 <p className="text-lg font-kalam text-gray-800 italic">
-                  "May your mind be sharp and your syllabus shorter than your patience."
+                  "Syllabus kam ho na ho, par toppers ke aansoo zaroor kam honge."
                 </p>
               </div>
               <div className="pt-6">
@@ -148,7 +148,7 @@ const ExamGreeting: React.FC = () => {
                   variant="outline"
                   className="hover:bg-primary/10"
                 >
-                  Start Over
+                  Dobara Shuru Karen
                 </Button>
               </div>
             </div>
