@@ -14,19 +14,42 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioSrc, autoPlay = false })
   
   useEffect(() => {
     if (audioRef.current) {
+      // Set audio volume to a comfortable level
+      audioRef.current.volume = 0.5;
+      
       if (autoPlay) {
-        const playPromise = audioRef.current.play();
+        // We need to wait for user interaction before playing audio
+        const playAudio = () => {
+          if (audioRef.current) {
+            const playPromise = audioRef.current.play();
+            
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => {
+                  setIsPlaying(true);
+                })
+                .catch(error => {
+                  console.error("Autoplay prevented:", error);
+                  setIsPlaying(false);
+                });
+            }
+          }
+        };
         
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true);
-            })
-            .catch(error => {
-              console.error("Autoplay prevented:", error);
-              setIsPlaying(false);
-            });
-        }
+        // Try to play audio
+        playAudio();
+        
+        // Also add a click event listener to document that will play audio on first interaction
+        const handleFirstInteraction = () => {
+          playAudio();
+          document.removeEventListener('click', handleFirstInteraction);
+        };
+        
+        document.addEventListener('click', handleFirstInteraction);
+        
+        return () => {
+          document.removeEventListener('click', handleFirstInteraction);
+        };
       }
     }
   }, [autoPlay]);

@@ -17,7 +17,7 @@ const ExamGreeting: React.FC = () => {
     if (section === 1) {
       const timer = setTimeout(() => {
         setAudioReady(true);
-      }, 3000);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [section]);
@@ -32,16 +32,19 @@ const ExamGreeting: React.FC = () => {
     }
   };
 
-  // Progress to section 2 after intro text
+  // Progress to section 2 after intro text with a longer delay
   const goToSection2 = () => {
-    setSection(2);
+    // Added longer delay to give more time to read
+    setTimeout(() => {
+      setSection(2);
+    }, 1000); // Additional delay before moving to next section
   };
 
   // Progress to section 4 after name reveal
   const goToSection4 = () => {
     setTimeout(() => {
       setSection(4);
-    }, 2000);
+    }, 6000); // Increased delay to give more time to read
   };
 
   return (
@@ -49,7 +52,7 @@ const ExamGreeting: React.FC = () => {
       {audioReady && (
         <AudioPlayer 
           audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
-          autoPlay={submitted}
+          autoPlay={true}
         />
       )}
       
@@ -64,13 +67,15 @@ const ExamGreeting: React.FC = () => {
               <AnimatedText 
                 text="Shh... Ruko jara, sabar karo..."
                 className="text-lg font-medium text-gray-700" 
-                delay={500}
+                delay={1000}
+                duration={2000}
                 animation="fade-in"
               />
               <AnimatedText 
                 text="Kuch mzedar hone wala hai... 😈"
                 className="text-lg font-medium text-gray-700" 
-                delay={2000}
+                delay={4000}
+                duration={2000}
                 animation="slide-up"
                 onAnimationComplete={goToSection2}
               />
@@ -107,25 +112,29 @@ const ExamGreeting: React.FC = () => {
                 text={`Arre ${name}!`}
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
-                delay={200}
+                delay={1000}
+                duration={2000}
               />
               <AnimatedText 
                 text="Sunna hai..."
                 className="text-xl font-medium text-gray-700" 
                 animation="fade-in"
-                delay={1000}
+                delay={3000}
+                duration={2000}
               />
               <AnimatedText 
                 text="War isliye cancel hui thi kyuki GNE ke students ko padhna tha! 📚😂"
                 className="text-2xl font-bold text-gradient" 
                 animation="bounce-in"
-                delay={2000}
+                delay={5000}
+                duration={2000}
               />
               <AnimatedText 
                 text="Break khatam, ab exam mode ON! 🧠💥"
                 className="text-lg font-medium text-gray-700" 
                 animation="slide-up"
-                delay={3000}
+                delay={7000}
+                duration={2000}
                 onAnimationComplete={goToSection4}
               />
             </div>

@@ -25,11 +25,11 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     const timer = setTimeout(() => {
       setIsVisible(true);
       
-      // Call the completion callback after animation finishes
+      // Call the completion callback after animation finishes + some additional time to read
       if (onAnimationComplete) {
         const animationTimer = setTimeout(() => {
           onAnimationComplete();
-        }, duration);
+        }, duration + 3000); // Added extra time to read
         
         return () => clearTimeout(animationTimer);
       }
