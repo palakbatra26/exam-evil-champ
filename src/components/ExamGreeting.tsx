@@ -72,7 +72,7 @@ const ExamGreeting: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {audioReady && (
         <AudioPlayer 
-          audioSrc="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=lofi-study-112191.mp3" 
+          audioSrc="https://cdn.pixabay.com/download/audio/2021/04/06/audio_b4242abb48.mp3?filename=acoustic-motivation-11290.mp3" 
           autoPlay={true}
         />
       )}
